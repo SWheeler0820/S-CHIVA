@@ -19,6 +19,22 @@
     .button { display: inline-block; background: #7a1f3d; color: white; text-decoration: none; padding: 0.9rem 2rem; border-radius: 999px; font-weight: bold; }
     .button:hover { background: #5c162d; }
     footer { text-align: center; padding: 2rem 1rem; font-size: 0.9rem; color: #777; }
+
+.carousel { max-width: 1100px; margin: 2rem auto 0; padding: 0 1rem; position: relative; }
+.carousel-window { overflow: hidden; border-radius: 12px; }
+.carousel-track { display: flex; gap: 12px; transition: transform 0.4s ease; }
+.carousel-track img { flex: 0 0 calc((100% - 48px) / 5); width: calc((100% - 48px) / 5); height: 220px; object-fit: cover; border-radius: 10px; background: #e8dcd6; }
+.arrow { position: absolute; top: 50%; transform: translateY(-50%); background: #7a1f3d; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 2; }
+.arrow:hover { background: #5c162d; }
+.arrow.left { left: 0; }
+.arrow.right { right: 0; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+.fact { background: white; border-radius: 12px; padding: 1.2rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.fact .big { font-size: 2rem; color: #7a1f3d; font-weight: bold; }
+@media (max-width: 800px) {
+  .carousel-track img { flex: 0 0 calc((100% - 12px) / 2); width: calc((100% - 12px) / 2); height: 180px; }
+}
+
   </style>
 </head>
 <body>
@@ -26,7 +42,24 @@
   <header>
     <h1>Scarlett Runs for CHIVA</h1>
     <p>Raising money for children and young people growing up with HIV</p>
+
+
   </header>
+.carousel { max-width: 1100px; margin: 2rem auto 0; padding: 0 1rem; position: relative; }
+.carousel-window { overflow: hidden; border-radius: 12px; }
+.carousel-track { display: flex; gap: 12px; transition: transform 0.4s ease; }
+.carousel-track img { flex: 0 0 calc((100% - 48px) / 5); width: calc((100% - 48px) / 5); height: 220px; object-fit: cover; border-radius: 10px; background: #e8dcd6; }
+.arrow { position: absolute; top: 50%; transform: translateY(-50%); background: #7a1f3d; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 2; }
+.arrow:hover { background: #5c162d; }
+.arrow.left { left: 0; }
+.arrow.right { right: 0; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+.fact { background: white; border-radius: 12px; padding: 1.2rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.fact .big { font-size: 2rem; color: #7a1f3d; font-weight: bold; }
+@media (max-width: 800px) {
+  .carousel-track img { flex: 0 0 calc((100% - 12px) / 2); width: calc((100% - 12px) / 2); height: 180px; }
+}
+
 
   <main>
 
@@ -99,6 +132,27 @@
       document.getElementById("countdown").textContent = days + " days to go";
     }
     updateCountdown();
+
+
+const track = document.getElementById("track");
+const slides = track.children;
+let position = 0;
+
+function visibleCount() {
+  return window.innerWidth <= 800 ? 2 : 5;
+}
+
+function moveCarousel() {
+  const maxPosition = slides.length - visibleCount();
+  position = Math.max(0, Math.min(position, maxPosition));
+  const step = slides[0].offsetWidth + 12;
+  track.style.transform = "translateX(-" + (position * step) + "px)";
+}
+
+document.getElementById("next").addEventListener("click", function () { position++; moveCarousel(); });
+document.getElementById("prev").addEventListener("click", function () { position--; moveCarousel(); });
+window.addEventListener("resize", moveCarousel);
+
   </script>
 
 </body>
