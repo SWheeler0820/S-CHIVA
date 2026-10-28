@@ -5,53 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scarlett Runs for CHIVA</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Georgia, serif;
-      color: #2b2b2b;
-      background: #fdf8f5;
-      line-height: 1.6;
-    }
-    header {
-      background: #7a1f3d;
-      color: white;
-      text-align: center;
-      padding: 3rem 1rem;
-    }
+    body { margin: 0; font-family: Georgia, serif; color: #2b2b2b; background: #fdf8f5; line-height: 1.6; }
+    header { background: #7a1f3d; color: white; text-align: center; padding: 3rem 1rem; }
     header h1 { margin: 0 0 0.5rem; font-size: 2.4rem; }
     header p { margin: 0; font-size: 1.1rem; opacity: 0.9; }
     main { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; }
     h2 { color: #7a1f3d; }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .bar {
-      background: #eee;
-      border-radius: 999px;
-      height: 24px;
-      overflow: hidden;
-    }
-    .bar-fill {
-      background: #7a1f3d;
-      height: 100%;
-      width: 0;
-      transition: width 1s ease;
-    }
+    .card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .bar { background: #eee; border-radius: 999px; height: 24px; overflow: hidden; }
+    .bar-fill { background: #7a1f3d; height: 100%; width: 0; transition: width 1s ease; }
     .totals { display: flex; justify-content: space-between; margin-top: 0.5rem; font-weight: bold; }
     .countdown { text-align: center; font-size: 1.6rem; color: #7a1f3d; }
-    .button {
-      display: inline-block;
-      background: #7a1f3d;
-      color: white;
-      text-decoration: none;
-      padding: 0.9rem 2rem;
-      border-radius: 999px;
-      font-weight: bold;
-    }
+    .button { display: inline-block; background: #7a1f3d; color: white; text-decoration: none; padding: 0.9rem 2rem; border-radius: 999px; font-weight: bold; }
     .button:hover { background: #5c162d; }
     footer { text-align: center; padding: 2rem 1rem; font-size: 0.9rem; color: #777; }
   </style>
@@ -66,15 +31,20 @@
   <main>
 
     <section class="card">
-      <h2>Why I'm doing this</h2>
+      <h2>Why I’m doing this</h2>
       <p>
-        Princess Diana showed the world that compassion can change how people treat children and families living with HIV.
-        I want to carry that spirit forward. I've taught ballet to children, and I know how much it matters
-        for young people to feel safe, supported and included.
+        I’ve always been inspired by Princess Diana, who helped break the stigma around HIV and AIDS when so few people would.
+        Many children are born with HIV. They didn’t choose it and couldn’t have prevented it, yet they can face a very different
+        kind of judgement from the one people assume.
       </p>
       <p>
-        On 21 March 2027 I'm running the Stramilano Half Marathon in Milan to raise money for CHIVA,
-        the Children's HIV Association, which supports children and young people with HIV and their families across the UK and Ireland.
+        Through teaching dance, I’ve seen how quickly children get treated as “different”. It’s rarely the children themselves.
+        It’s the fear and misunderstanding of the adults around them, like parents who won’t allow playdates. With modern treatment,
+        children growing up with HIV can live full, healthy lives. What holds them back is stigma.
+      </p>
+      <p>
+        That’s why I’m running the Stramilano Half Marathon on 21 March 2027 to raise money for CHIVA, the Children’s HIV Association,
+        which supports these children and young people, and helps everyone around them understand.
       </p>
     </section>
 
@@ -101,7 +71,7 @@
   </main>
 
   <footer>
-    &copy; Scarlett &middot; Fundraising for CHIVA (Children's HIV Association)
+    &copy; Scarlett &middot; Fundraising for CHIVA (Children’s HIV Association)
   </footer>
 
   <script>
@@ -113,17 +83,14 @@
 
     const raceDate = new Date("2027-03-21T09:00:00+01:00");
 
-    // Progress bar
     const percent = Math.min(100, (raised / goal) * 100);
     document.getElementById("barFill").style.width = percent + "%";
     document.getElementById("raisedText").textContent = "Raised: €" + raised;
     document.getElementById("goalText").textContent = "Goal: €" + goal;
     document.getElementById("donateButton").href = donateLink;
 
-    // Countdown
     function updateCountdown() {
-      const now = new Date();
-      const diff = raceDate - now;
+      const diff = raceDate - new Date();
       if (diff <= 0) {
         document.getElementById("countdown").textContent = "Race day is here!";
         return;
