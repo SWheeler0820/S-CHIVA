@@ -137,34 +137,36 @@
   </footer>
 
   <script>
-    // ===== EDIT THESE THREE VALUES =====
- <section class="card" style="text-align:center;">
-      <h2>Support the run</h2>
-      <p>Every donation supports Mental Health Europe.</p>
-      <a class="button" id="donateButton" href="https://whydonate.com/fundraising/scarlett-runs-for-mental-health-europe">Donate now</a>
-          // paste your fundraising page link here after 14 November
-    // ===================================
 
-    const raceDate = new Date("2027-03-21T09:00:00+01:00");
+// ===== FUNDRAISING SETTINGS =====
+const goal = 500;
+const raised = 0;
+// ================================
 
-    const percent = Math.min(100, (raised / goal) * 100);
-    document.getElementById("barFill").style.width = percent + "%";
-    document.getElementById("raisedText").textContent = "Raised: €" + raised;
-    document.getElementById("goalText").textContent = "Goal: €" + goal;
-    document.getElementById("donateButton").href = donateLink;
+const raceDate = new Date("2027-03-21T09:00:00+01:00");
 
-    function updateCountdown() {
-      const diff = raceDate - new Date();
-      if (diff <= 0) {
-        document.getElementById("countdown").textContent = "Race day is here!";
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").textContent = days + " days to go";
-    }
-    updateCountdown();
+const percent = Math.min(100, (raised / goal) * 100);
 
+document.getElementById("barFill").style.width = percent + "%";
+document.getElementById("raisedText").textContent = "Raised: €" + raised;
+document.getElementById("goalText").textContent = "Goal: €" + goal;
 
+// COUNTDOWN
+function updateCountdown() {
+  const diff = raceDate - new Date();
+
+  if (diff <= 0) {
+    document.getElementById("countdown").textContent = "Race day is here!";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent = days + " days to go";
+}
+
+updateCountdown();
+
+// IMAGE CAROUSEL
 const track = document.getElementById("track");
 const slides = track.children;
 let position = 0;
@@ -174,15 +176,29 @@ function visibleCount() {
 }
 
 function moveCarousel() {
-  const maxPosition = slides.length - visibleCount();
+  const maxPosition = Math.max(0, slides.length - visibleCount());
   position = Math.max(0, Math.min(position, maxPosition));
-  const step = slides[0].offsetWidth + 12;
+
+  if (slides.length === 0) return;
+
+  const step = slides[0].getBoundingClientRect().width + 12;
   track.style.transform = "translateX(-" + (position * step) + "px)";
 }
 
-document.getElementById("next").addEventListener("click", function () { position++; moveCarousel(); });
-document.getElementById("prev").addEventListener("click", function () { position--; moveCarousel(); });
+document.getElementById("next").addEventListener("click", function () {
+  position++;
+  moveCarousel();
+});
+
+document.getElementById("prev").addEventListener("click", function () {
+  position--;
+  moveCarousel();
+});
+
 window.addEventListener("resize", moveCarousel);
+
+moveCarousel();
+
 
   </script>
 
